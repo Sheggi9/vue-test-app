@@ -20,23 +20,30 @@
     },
     methods: {
       getAllPosts() {
-        // this.$http.get(this.posts).then(response => {
-        //     console.log(response.body)
-        //   },
-        //   response => {
-        //     console.log('error')
-        //   }
-        // )
+        let options ={
+          params:{
+            _start: 0,
+            _limit: 15
+          }
+        }
+        this.$http.get(this.posts, options).then(response => {
+            console.log(response.body)
+            response.body.forEach((item) => this.newUsers.push(item))
+          },
+          response => {
+            console.log('error')
+          }
+        )
 
-        this.$http.get(this.posts)
-          .then(response => response.json())
-          .then(data => {
-            // console.log(data)
-            this.newUsers.splice(0);
-            data.forEach((item) => this.newUsers.push(item))
-          }).catch(error => {
-          console.log(error);
-        });
+        // this.$http.get(this.posts)
+        //   .then(response => response.json())
+        //   .then(data => {
+        //     // console.log(data)
+        //     this.newUsers.splice(0);
+        //     data.forEach((item) => this.newUsers.push(item))
+        //   }).catch(error => {
+        //   console.log(error);
+        // });
       }
     },
     mounted() {
