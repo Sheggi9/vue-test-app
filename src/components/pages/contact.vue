@@ -11,11 +11,13 @@
     <ul>
       <zzzz :users="users"/>
     </ul>
-
     <hr>
+
+
+
     <div>
       <ul>
-        <contact-list-articles v-for="post in visibleArticles" :post="post"/>
+        <contact-list-articles v-for="(post, index) in visibleArticles" :key="index" :post="post"/>
       </ul>
       <contact-list-articles-pagination @changePagination="currentPageNumber" :totalPages="totalPages"/>
     </div>
@@ -35,7 +37,8 @@
     data() {
       return {
         page: 0,
-        step: 10
+        step: 40,
+        AutoScrollStep: 1
       }
     },
     computed: {
@@ -49,7 +52,7 @@
         return (Math.ceil(Number(this.postsAll.length) / this.step))
       },
       visibleArticles(){
-        return this.postsAll.slice(this.page * this.step, (this.page + 1) * this.step)
+        return this.postsAll.slice(this.page * this.step, (this.page + this.AutoScrollStep) * this.step)
       }
     },
     methods: {
