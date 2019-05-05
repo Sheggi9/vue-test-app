@@ -1,6 +1,6 @@
 <template>
   <ul class="users__list">
-    <li class="users__item" v-for="user in users">
+    <li class="users__item" v-for="(user, index) in users">
       <h4 class="users__item-title">{{user.title}}</h4>
       <div class="users__item-description">{{user.body}}</div>
     </li>
@@ -12,7 +12,7 @@
     props: {
       users: Array,
     },
-    name: "usersListViewer"
+    name: "usersListViewer",
   }
 </script>
 

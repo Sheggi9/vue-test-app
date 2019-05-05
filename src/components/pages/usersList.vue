@@ -1,63 +1,69 @@
 <template>
   <div class="users-list">
     <h1 class="users-list__title">Users list</h1>
-    <users-list-viewer :users="newUsers"/>
+    <users-list-viewer :users="newUsersVisible"/>
+    <user-list-pagination @changePagination="handlePaginationChange" :totalPage="totalPagesPagination"/>
   </div>
 
 </template>
 
 <script>
   import UsersListViewer from "@/components/usersListViewer";
+  import UserListPagination from "@/components/userListPagination";
 
   export default {
     name: "usersList",
-    components: {UsersListViewer},
-    data () {
+    components: {UserListPagination, UsersListViewer},
+    data() {
       return {
         newUsers: [],
-        posts: "https://jsonplaceholder.typicode.com/posts"
+        posts: "https://jsonplaceholder.typicode.com/posts",
+        page: 0,
+        step: 33
       }
     },
     methods: {
       getAllPosts() {
-        let options ={
-          params:{
-            _start: 0,
-            _limit: 15
-          }
-        }
-        this.$http.get(this.posts, options).then(response => {
+        this.$http.get(this.posts).then(response => {
             console.log(response.body)
-            response.body.forEach((item) => this.newUsers.push(item))
+            response.body.forEach((item, index) => {
+              const indexedItem = {
+                ...item,
+                title: (index + 1) + ' ' + item.title
+              }
+              this.newUsers.push(indexedItem)
+            })
           },
           response => {
             console.log('error')
           }
         )
-
-        // this.$http.get(this.posts)
-        //   .then(response => response.json())
-        //   .then(data => {
-        //     // console.log(data)
-        //     this.newUsers.splice(0);
-        //     data.forEach((item) => this.newUsers.push(item))
-        //   }).catch(error => {
-        //   console.log(error);
-        // });
+      },
+      handlePaginationChange(pageNumber) {
+        this.page = pageNumber
       }
     },
     mounted() {
       this.getAllPosts()
+    },
+    computed: {
+      newUsersVisible () {
+        return this.newUsers.slice(this.page * this.step, (this.step * (this.page + 1)))
+      },
+      totalPagesPagination () {
+        return Math.ceil(Number(this.newUsers.length) / this.step)
+      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .users-list__title{
+  .users-list__title {
     padding: 20px;
     flex: 0 0 auto;
   }
-  .users-list{
+
+  .users-list {
     height: 100%;
     display: flex;
     flex-direction: column;

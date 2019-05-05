@@ -25,11 +25,11 @@
       <li>{{doneTodosCount}}</li>
     </ul>
 
-    <hr>
-    <div>Todos get by id 2</div>
-    <ul>
-      <li>{{getTodoById(2)}}</li>
-    </ul>
+    <!--<hr>-->
+    <!--<div>Todos get by id 2</div>-->
+    <!--<ul>-->
+      <!--<li>{{getTodoById(2)}}</li>-->
+    <!--</ul>-->
   </div>
 
 </template>
