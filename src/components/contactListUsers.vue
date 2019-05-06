@@ -1,7 +1,7 @@
 <template>
   <li @click="toggleItem" class="user-list">
     <div class="user-top-menu">
-      <div class="name">{{user.name}}</div>
+      <div class="name" v-bind:class="{ 'toggle-class': toggled}">{{user.name}}</div>
       <div v-bind:class="{ 'arrow-show': toggled }" class="arrow-hide">></div>
     </div>
     <transition name="fade">
@@ -79,5 +79,8 @@
   }
   .email{
     background: #77ff4b;
+  }
+  .toggle-class{
+    background: #ff1627;
   }
 </style>

@@ -35,6 +35,8 @@
           console.log("hi")
           this.load = false
           this.$emit('changePaginationScroll')
+        } else {
+          this.load = true
         }
       }
     },

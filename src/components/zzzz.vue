@@ -2,7 +2,7 @@
   <div class="qqq">
     <li v-for="(user, index ) in users" :key="index" @click="toggleItem(index)" class="user-list">
       <div class="user-top-menu">
-        <div class="name">{{user.name}}</div>
+        <div class="name" >{{user.name}}</div>
         <div v-bind:class="{ 'arrow-show': toggled }" class="arrow-hide">></div>
       </div>
       <transition name="fade">
@@ -27,9 +27,6 @@
     },
 
     methods: {
-      // toggleItem: function (index) {
-      //   this.toggled = !this.toggled;
-      // }
       toggleItem: function (index) {
         if (this.toggled === index) this.toggled = false;
         else this.toggled = index;
@@ -39,5 +36,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+  .toggle-class{
+    background: #ff1627;
+  }
 </style>

@@ -6,10 +6,16 @@ Vue.use(Vuex)
 
 
 const state = {
-    count: 3,
-    count1: 5,
-    postsAll: [],
-    users: []
+  count: 3,
+  count1: 5,
+  postsAll: [],
+  users: [],
+  activeId: [
+    {id:1},
+    {id:2},
+    {id:3},
+    {id:4}
+    ]
 }
 
 const actions = {
@@ -25,7 +31,7 @@ const actions = {
         console.log(error);
       })
   },
-  getPostAll2({commit}) {
+  getUsersAll({commit}) {
     axios
       .get('https://jsonplaceholder.typicode.com/users')
       .then(r => r.data)
@@ -50,7 +56,6 @@ const mutations = {
 }
 
 const getters = {}
-
 
 
 export default new Vuex.Store({state, mutations, getters, actions})
